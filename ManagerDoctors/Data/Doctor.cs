@@ -35,7 +35,7 @@ public partial class Doctor
 
 	[Required(ErrorMessage = "Required")]
 	[RegularExpression(@"^\d+$",
-   ErrorMessage = "Is number")]
+   	ErrorMessage = "Is number")]
 	[StringLength(10, MinimumLength = 10, ErrorMessage = "{0} is 10 numbers")]
 	[Display(Name = "Phone number")]
 	public string Phone { get; set; } = null!;

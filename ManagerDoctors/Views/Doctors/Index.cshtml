@@ -1,0 +1,118 @@
+﻿@model IEnumerable<ManagerDoctors.Data.Doctor>
+
+@{
+	ViewData["Title"] = "Index";
+}
+<div class="container">
+	<partial name="_AlertMessage">
+		<h1>Index</h1>
+
+		<div class="row justify-content-between">
+			<div class="col-sm-12 col-md-12 col-lg-8">
+				<p>
+					<a asp-action="Create" class="btn btn-primary"><i class="fa-solid fa-circle-plus"></i></a>
+				</p>
+			</div>
+			<div class="col-sm-12 col-md-12 col-lg-4">
+				<form asp-action="Index" method="get">
+					<div class="form-group">
+						<label for="SearchString">Search National ID:</label>
+						<input type="text" name="SearchString"
+							   value="@ViewData[" CurrentFilter"]" />
+						<input type="submit" value="Search" class="btn btn-primary">
+
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="table-responsive">
+			<table class="table table-striped" border="1" id="pagination_ex">
+				<thead>
+					<tr>
+						<th>STT</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Id)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.FullName)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Email)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Date)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Gender)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Phone)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Address)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Avatar)
+						</th>
+						<th></th>
+					</tr>
+				</thead>
+				@{
+					int pageIndex = ViewBag.CurrentPage - 1; // Chỉ số trang hiện tại (bắt đầu từ 0)
+					int pageSize = 5; // Số lượng mục trên mỗi trang
+					int itemIndex = pageIndex * pageSize + 1; // Chỉ số mục hiện tại
+				}
+				@foreach (var item in Model)
+				{
+					<tr>
+						<td>@itemIndex</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Id)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.FullName)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Email)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Date)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Gender)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Phone)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Address)
+						</td>
+						<td>
+							<img src="@Html.DisplayFor(modelItem => item.Avatar)" class="rounded-circle" style="max-width: 50px; max-height: 50px;">
+						</td>
+						<td>
+							<a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+							<a asp-action="Details" asp-route-id="@item.Id" class="btn btn-success"><i class="fas fa-info-circle"></i></a>
+							<a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger"><i class="fas fa-minus-circle"></i></a>
+						</td>
+					</tr>
+					itemIndex++; // Tăng chỉ số mục hiện tại
+				}
+				</tbody>
+			</table>
+		</div>
+
+		<div class="d-flex justify-content-center">
+			<nav aria-label="Page navigation example">
+				<ul class="pagination">
+					@for (int i = 1; i <= ViewBag.TotalPages; i++)
+					{
+						<li class="page-item @(ViewBag.CurrentPage == i ? "active" : "")">
+							<a class="page-link" href="?page=@i&searchString=@ViewData["CurrentFilter"]">@i</a>
+						</li>
+					}
+				</ul>
+			</nav>
+		</div>
+</div>
+</div>

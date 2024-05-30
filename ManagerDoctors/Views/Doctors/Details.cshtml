@@ -1,0 +1,74 @@
+﻿@model ManagerDoctors.Data.Doctor
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Doctor</h4>
+    <hr />
+    <div class="container">
+        <dl class="row">
+        <dt class = "col-sm-3 offset-3">
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+            <dt class="col-sm-3 offset-3">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+            <dd class="col-sm-6">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+            <dt class="col-sm-3 offset-3">
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+            <dd class="col-sm-6">
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+            <dt class="col-sm-3 offset-3">
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+            <dd class="col-sm-6">
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+            <dt class="col-sm-3 offset-3">
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+            <dd class="col-sm-6">
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+            <dt class="col-sm-3 offset-3">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+            <dd class="col-sm-6">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+            <dt class="col-sm-3 offset-3">
+            @Html.DisplayNameFor(model => model.Avatar)
+        </dt>
+            <dd class="col-sm-6">
+                @if (!string.IsNullOrEmpty(Model.Avatar))
+                {
+                    <div class="form-group">
+                        <label>Avatar upload</label>
+                        <div>
+                            <img src="@Url.Content($"~/{Model.Avatar}")" alt="Avatar" class="img-thumbnail" style="max-width: 100px;" />
+                        </div>
+                    </div>
+                }
+                else{
+                    <p>No profile picture yet</p>
+                }
+        </dd>
+		</dl>    
+        <div class="form-group d-flex justify-content-end mt-1">
+			<a asp-action="Index" class="btn btn-danger me-2">Cancel</a>
+			<a asp-action="Edit" class="btn btn-warning" asp-route-id="@Model?.Id">Edit</a>
+		</div>
+    </div>
+
+</div>

@@ -1,0 +1,26 @@
+﻿@{
+    var message = TempData["StatusMessage"] as string;
+    var errorMessage = TempData["ErrorMessage"] as string;
+}
+
+@if (!string.IsNullOrEmpty(message))
+{
+    <div id="statusMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+        <p class="text-center"><i class="fa-solid fa-circle-check"></i> @message</p>
+    </div>
+}
+else if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div id="statusMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <p class="text-center"><i class="fa-solid fa-circle-xmark"></i> @errorMessage</p>
+    </div>
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        setTimeout(function () {
+            $('#statusMessage').fadeOut('slow');
+        }, 3000);
+    });
+</script>
